@@ -1,0 +1,59 @@
+<FindBugsFilter>
+
+
+    <!-- for lombok builder-->
+
+    <Match>
+        <Or>
+            <!-- Ignore checking for Builder classes because there are not annotated with @Nullable -->
+            <Class name="~com\.github\.alexandrenavarro\..*Builder$"/>
+        </Or>
+        <Bug pattern="NP_NONNULL_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR" />
+
+    </Match>
+
+    <!-- for lombok builder-->
+
+<!--    <Match>-->
+<!--        <Or>-->
+<!--            &lt;!&ndash; Ignore checking for Builder classes because there are not annotated with @Nullable &ndash;&gt;-->
+<!--            <Class name="~com\.github\.alexandrenavarro\..*Builder$"/>-->
+<!--        </Or>-->
+<!--        <Bug pattern="NP_PARAMETER_MUST_BE_NONNULL_BUT_MARKED_AS_NULLABLE" />-->
+
+<!--    </Match>-->
+
+
+    <!-- for pojo builder-->
+
+    <Match>
+        <Or>
+            <!-- Ignore checking for Builder classes because there are not annotated with @Nullable -->
+            <Class name="~com\.github\.alexandrenavarro\..*Builder$"/>
+        </Or>
+        <Bug pattern="THROWS_METHOD_THROWS_RUNTIMEEXCEPTION" />
+
+    </Match>
+
+
+    <!-- for pojo builder-->
+    <Match>
+        <Or>
+            <!-- Ignore checking for Builder classes because there are not annotated with @Nullable -->
+            <Class name="~com\.github\.alexandrenavarro\..*Builder$"/>
+        </Or>
+        <Bug pattern="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD" />
+
+    </Match>
+
+    <!-- for immutable builder-->
+    <Match>
+        <Or>
+            <Class name="~com\.github\.alexandrenavarro\..*Immutable.*$"/>
+        </Or>
+        <Bug pattern="NP_METHOD_PARAMETER_TIGHTENS_ANNOTATION" />
+
+    </Match>
+
+
+</FindBugsFilter>
