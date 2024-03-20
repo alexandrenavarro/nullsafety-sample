@@ -3,14 +3,14 @@
 
     <!-- for lombok builder-->
 
-    <Match>
-        <Or>
-            <!-- Ignore checking for Builder classes because there are not annotated with @Nullable -->
-            <Class name="~com\.github\.alexandrenavarro\..*Builder$"/>
-        </Or>
-        <Bug pattern="NP_NONNULL_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR" />
+<!--    <Match>-->
+<!--        <Or>-->
+<!--            &lt;!&ndash; Ignore checking for Builder classes because there are not annotated with @Nullable &ndash;&gt;-->
+<!--            <Class name="~com\.github\.alexandrenavarro\..*Builder$"/>-->
+<!--        </Or>-->
+<!--        <Bug pattern="NP_NONNULL_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR" />-->
 
-    </Match>
+<!--    </Match>-->
 
     <!-- for lombok builder-->
 
@@ -26,34 +26,34 @@
 
     <!-- for pojo builder-->
 
-    <Match>
-        <Or>
-            <!-- Ignore checking for Builder classes because there are not annotated with @Nullable -->
-            <Class name="~com\.github\.alexandrenavarro\..*Builder$"/>
-        </Or>
-        <Bug pattern="THROWS_METHOD_THROWS_RUNTIMEEXCEPTION" />
+<!--    <Match>-->
+<!--        <Or>-->
+<!--            &lt;!&ndash; Ignore checking for Builder classes because there are not annotated with @Nullable &ndash;&gt;-->
+<!--            <Class name="~com\.github\.alexandrenavarro\..*Builder$"/>-->
+<!--        </Or>-->
+<!--        <Bug pattern="THROWS_METHOD_THROWS_RUNTIMEEXCEPTION" />-->
 
-    </Match>
+<!--    </Match>-->
 
 
     <!-- for pojo builder-->
-    <Match>
-        <Or>
-            <!-- Ignore checking for Builder classes because there are not annotated with @Nullable -->
-            <Class name="~com\.github\.alexandrenavarro\..*Builder$"/>
-        </Or>
-        <Bug pattern="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD" />
+<!--    <Match>-->
+<!--        <Or>-->
+<!--            &lt;!&ndash; Ignore checking for Builder classes because there are not annotated with @Nullable &ndash;&gt;-->
+<!--            <Class name="~com\.github\.alexandrenavarro\..*Builder$"/>-->
+<!--        </Or>-->
+<!--        <Bug pattern="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD" />-->
 
-    </Match>
+<!--    </Match>-->
 
     <!-- for immutable builder-->
-    <Match>
-        <Or>
-            <Class name="~com\.github\.alexandrenavarro\..*Immutable.*$"/>
-        </Or>
-        <Bug pattern="NP_METHOD_PARAMETER_TIGHTENS_ANNOTATION" />
+<!--    <Match>-->
+<!--        <Or>-->
+<!--            <Class name="~com\.github\.alexandrenavarro\..*Immutable.*$"/>-->
+<!--        </Or>-->
+<!--        <Bug pattern="NP_METHOD_PARAMETER_TIGHTENS_ANNOTATION" />-->
 
-    </Match>
+<!--    </Match>-->
 
 
 </FindBugsFilter>

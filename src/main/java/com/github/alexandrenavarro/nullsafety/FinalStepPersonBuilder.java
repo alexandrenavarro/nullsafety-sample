@@ -6,5 +6,5 @@ public interface FinalStepPersonBuilder {
 
     FinalStepPersonBuilder withMiddleName(@NonNull String middleName);
 
-    Person build();
+    PersonWithInternalBuilder build();
 }

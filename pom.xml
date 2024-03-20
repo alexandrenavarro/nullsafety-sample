@@ -6,50 +6,109 @@
     <artifactId>nullsafety</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <properties>
-        <java.version>17</java.version>
-
+        <!-- tool version -->
+        <java.version>21</java.version>
+        <maven.version>3.9.6</maven.version>
+        <!-- dependencies version -->
+        <spring-boot-dependencies.version>3.2.3</spring-boot-dependencies.version>
+        <jspecify.version>0.3.0</jspecify.version>
+        <jsr305.version>3.0.2</jsr305.version>
+        <jakarta.annotation-api.version>2.1.1</jakarta.annotation-api.version>
+        <annotations.version>24.1.0</annotations.version>
+        <jilt.version>1.4</jilt.version>
+        <pojobuilder.version>4.3.0</pojobuilder.version>
+        <value.version>2.10.1</value.version>
+        <guava.version>32.1.3-jre</guava.version>
+        <!-- plugin version -->
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+        <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
+        <error_prone_core.version>2.26.1</error_prone_core.version>
+        <nullaway.version>0.10.24</nullaway.version>
+        <spotbugs-maven-plugin.version>4.8.3.1</spotbugs-maven-plugin.version>
+        <spotbugs.version>4.8.3</spotbugs.version>
+        <checker.version>3.42.0</checker.version>
     </properties>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>17</source>
-                    <target>17</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                     <compilerArgs>
+<!--                        <compilerArgument>-Xlint:all</compilerArgument>-->
                         <arg>-XDcompilePolicy=simple</arg>
-                        <arg>-Xplugin:ErrorProne -Xep:NullAway:ERROR -XepOpt:NullAway:AnnotatedPackages=com.github.alexandrenavarro.nullsafety -XepOpt:NullAway:ExcludedClassAnnotations=javax.annotation.processing.Generated</arg>
+<!--                        <arg>-Xplugin:ErrorProne -Xep:NullAway:ERROR -XepOpt:NullAway:AnnotatedPackages=com.github.alexandrenavarro.nullsafety -XepOpt:NullAway:ExcludedClassAnnotations=javax.annotation.processing.Generated</arg>-->
+                        <arg>-Xplugin:ErrorProne -Xep:NullAway:ERROR -XepOpt:NullAway:AnnotatedPackages=com.github.alexandrenavarro.nullsafety</arg>
                     </compilerArgs>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>com.google.errorprone</groupId>
                             <artifactId>error_prone_core</artifactId>
-                            <version>2.14.0</version>
+                            <version>${error_prone_core.version}</version>
                         </path>
                         <path>
                             <groupId>com.uber.nullaway</groupId>
                             <artifactId>nullaway</artifactId>
-                            <version>0.9.7</version>
+                            <version>${nullaway.version}</version>
                         </path>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.24</version>
                         </path>
+<!--                        <path>-->
+<!--                            <groupId>org.checkerframework</groupId>-->
+<!--                            <artifactId>checker</artifactId>-->
+<!--                            <version>${checker.version}</version>-->
+<!--                        </path>-->
                     </annotationProcessorPaths>
+<!--                    <annotationProcessors>-->
+<!--                        <annotationProcessor>-->
+<!--                            org.checkerframework.checker.nullness.NullnessChecker-->
+<!--                        </annotationProcessor>-->
+<!--                    </annotationProcessors>-->
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven-enforcer-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireJavaVersion>
+                                    <version>${java.version}</version>
+                                </requireJavaVersion>
+                                <requireMavenVersion>
+                                    <version>${maven.version}</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.7.0.0</version>
+                <version>${spotbugs-maven-plugin.version}</version>
                 <dependencies>
                     <dependency>
                         <groupId>com.github.spotbugs</groupId>
                         <artifactId>spotbugs</artifactId>
-                        <version>4.7.0</version>
+                        <version>${spotbugs.version}</version>
                     </dependency>
                 </dependencies>
                 <configuration>
@@ -67,20 +126,14 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.0</version>
-            </plugin>
         </plugins>
     </build>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.7.0</version>
+                <version>${spring-boot-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -97,32 +150,71 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cc.jilt</groupId>
+            <artifactId>jilt</artifactId>
+            <version>${jilt.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>net.karneim</groupId>
             <artifactId>pojobuilder</artifactId>
-            <version>4.3.0</version>
+            <version>${pojobuilder.version}</version>
             <!-- 'provided' scope because this is only needed during compilation -->
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.immutables</groupId>
             <artifactId>value</artifactId>
-            <version>2.9.0</version>
+            <version>${value.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jspecify</groupId>
+            <artifactId>jspecify</artifactId>
+            <version>${jspecify.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <version>${jakarta.annotation-api.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>
-            <version>3.0.2</version>
+            <version>${jsr305.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>${annotations.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-annotations</artifactId>
+            <version>${spotbugs.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.checkerframework</groupId>
+            <artifactId>checker-qual</artifactId>
+            <version>${checker.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.checkerframework</groupId>
+            <artifactId>checker</artifactId>
+            <version>${checker.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>jakarta.el</artifactId>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
